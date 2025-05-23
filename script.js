@@ -30,47 +30,75 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-console.log(document.documentElement);
-const header = document.querySelector('.header');
-const allSections = document.querySelectorAll('.section');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
-document.getElementById('section--1');
-const allButtons = document.getElementsByTagName('button');
-console.log(allButtons);
-console.log(document.getElementsByClassName('btn'));
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
 
-//Creating and inserting elements
+  console.log(e.target.getBoundingClientRect());
 
-// insertAdjacentHTML;
-const message = document.createElement('div');
-message.classList.add('cookie-message');
-// message.textContent = 'We use cookies for improved functionality and analytics';
-message.innerHTML =
-  'We use cookies for improved functionality and analytics. <button class="btn btn--close-cookie">Got it</button>  ';
+  console.log('Current scroll', window.scrollX, scrollY);
 
-// header.prepend(message);
-header.append(message);
-// header.append(message.cloneNode(true));
+  //Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.scrollX,
+  //   s1coords.top + window.scrollY
+  // );
 
-// header.before(message);
-// header.after(message);
+  // window.scrollTo({
+  //   left: s1coords.left + window.scrollX,
+  //   top: s1coords.top + window.scrollY,
+  //   behavior: 'smooth',
+  // });
 
-document
-  .querySelector('.btn--close-cookie')
-  .addEventListener('click', function () {
-    message.remove();
+  section1.scrollIntoView({
+    behavior: 'smooth',
   });
+});
 
-message.style.backgroundColor = '#37383d';
-message.style.width = '120%';
+// console.log(document.documentElement);
+// const header = document.querySelector('.header');
+// const allSections = document.querySelectorAll('.section');
 
-console.log(message.style.height);
-console.log(getComputedStyle(message).color);
-message.style.height =
-  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+// document.getElementById('section--1');
+// const allButtons = document.getElementsByTagName('button');
+// console.log(allButtons);
+// console.log(document.getElementsByClassName('btn'));
 
-document.documentElement.style.setProperty('--color-primary', 'orangered');
+// //Creating and inserting elements
 
-const logo = document.querySelector('.nav__logo');
+// // insertAdjacentHTML;
+// const message = document.createElement('div');
+// message.classList.add('cookie-message');
+// // message.textContent = 'We use cookies for improved functionality and analytics';
+// message.innerHTML =
+//   'We use cookies for improved functionality and analytics. <button class="btn btn--close-cookie">Got it</button>  ';
 
-console.log(logo.getAttribute());
+// // header.prepend(message);
+// header.append(message);
+// // header.append(message.cloneNode(true));
+
+// // header.before(message);
+// // header.after(message);
+
+// document
+//   .querySelector('.btn--close-cookie')
+//   .addEventListener('click', function () {
+//     message.remove();
+//   });
+
+// message.style.backgroundColor = '#37383d';
+// message.style.width = '120%';
+
+// console.log(message.style.height);
+// console.log(getComputedStyle(message).color);
+// message.style.height =
+//   Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+
+// document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+// const logo = document.querySelector('.nav__logo');
+
+// console.log(logo.getAttribute());
