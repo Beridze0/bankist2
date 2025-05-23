@@ -58,18 +58,47 @@ btnScrollTo.addEventListener('click', function (e) {
 });
 
 // EventListeners
-const h1 = document.querySelector('h1');
+// const h1 = document.querySelector('h1');
 
-const alertH1 = function (e) {
-  alert('addEventListener: Great!');
-  h1.removeEventListener('mouseenter', alertH1);
-};
+// const alertH1 = function (e) {
+//   alert('addEventListener: Great!');
+//   h1.removeEventListener('mouseenter', alertH1);
+// };
 
-h1.addEventListener('mouseenter', alertH1);
+// h1.addEventListener('mouseenter', alertH1);
 
-h1.onmouseenter = function (e) {
-  alert('onmouseenter: Great!');
-};
+// h1.onmouseenter = function (e) {
+//   alert('onmouseenter: Great!');
+// };
+
+// rgb(255,255,255)
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget);
+  console.log(e.currentTarget === this); //true
+
+  //Stop propagation
+  e.stopPropagation();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER', e.target, e.currentTarget);
+});
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('NAV', e.target, e.currentTarget);
+});
+
+//e.target eknebat saerto am shemtxvevashi tu davacvebit .nav__link is elements e ikneba kvelastvis nav__link is elementi
+//e.currentTarget eknebat kvelas gansxvavebuli da igivea rac this
 
 // console.log(document.documentElement);
 // const header = document.querySelector('.header');
