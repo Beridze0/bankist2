@@ -2,6 +2,8 @@
 
 ///////////////////////////////////////
 // Modal window
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
@@ -30,75 +32,40 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
-
 btnScrollTo.addEventListener('click', function (e) {
   const s1coords = section1.getBoundingClientRect();
   section1.scrollIntoView({
     behavior: 'smooth',
-    // console.log(s1coords);
-
-    // console.log(e.target.getBoundingClientRect());
-
-    // console.log('Current scroll', window.scrollX, scrollY);
-
-    //Scrolling
-    // window.scrollTo(
-    //   s1coords.left + window.scrollX,
-    //   s1coords.top + window.scrollY
-    // );
-
-    // window.scrollTo({
-    //   left: s1coords.left + window.scrollX,
-    //   top: s1coords.top + window.scrollY,
-    //   behavior: 'smooth',
-    // });
   });
 });
 
-// EventListeners
-// const h1 = document.querySelector('h1');
+/////////////////////////////
+//PAGE NAVIGATION
 
-// const alertH1 = function (e) {
-//   alert('addEventListener: Great!');
-//   h1.removeEventListener('mouseenter', alertH1);
-// };
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     document.querySelector(id).scrollIntoView({
+//       behavior: 'smooth',
+//     });
+//   });
+// });
 
-// h1.addEventListener('mouseenter', alertH1);
-
-// h1.onmouseenter = function (e) {
-//   alert('onmouseenter: Great!');
-// };
-
-// rgb(255,255,255)
-const randomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
-
-const randomColor = () =>
-  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
-
-document.querySelector('.nav__link').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('LINK', e.target, e.currentTarget);
-  console.log(e.currentTarget === this); //true
-
-  //Stop propagation
-  e.stopPropagation();
-});
+// 1. Add event listener to common parent element
+// 2. Determine what element originated the event
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('CONTAINER', e.target, e.currentTarget);
+  e.preventDefault();
+  //Matching strategy
+  if (e.target.classList.contains('nav__link')) {
+    console.log('LINK');
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({
+      behavior: 'smooth',
+    });
+  }
 });
-
-document.querySelector('.nav').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('NAV', e.target, e.currentTarget);
-});
-
-//e.target eknebat saerto am shemtxvevashi tu davacvebit .nav__link is elements e ikneba kvelastvis nav__link is elementi
-//e.currentTarget eknebat kvelas gansxvavebuli da igivea rac this
 
 // console.log(document.documentElement);
 // const header = document.querySelector('.header');
