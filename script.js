@@ -250,7 +250,7 @@ const slider = function () {
 
   const prevSlide = function () {
     if (curSlide === 0) {
-      curSlide = maxSlide = 1;
+      curSlide = maxSlide - 1;
     } else curSlide--;
     goToSlide(curSlide);
     activateDot(curSlide);
@@ -361,3 +361,17 @@ slider();
 // const logo = document.querySelector('.nav__logo');
 
 // console.log(logo.getAttribute());
+
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and DOM tree built !', e);
+});
+
+window.addEventListener('load', function (e) {
+  console.log('Page fully loaded', e);
+});
+
+window.addEventListener('beforeunload', function (e) {
+  e.preventDefault();
+  console.log(e);
+  e.returnValue = '';
+});
