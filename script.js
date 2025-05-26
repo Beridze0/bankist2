@@ -155,8 +155,6 @@ headerObserver.observe(header);
 // Revealing elements on scroll
 const allSections = document.querySelectorAll('.section');
 const revealSection = function (entries, observer) {
-  console.log(entries);
-
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     entry.target.classList.remove('section--hidden');
@@ -174,6 +172,36 @@ allSections.forEach(function (section) {
   sectionObserver.observe(section);
   section.classList.add('section--hidden');
 });
+
+//Lazy loading images
+
+const imgTargets = document.querySelectorAll('img[data-src]');
+
+const loadImage = function (entries, observer) {
+  const [entry] = entries;
+  console.log(entry);
+
+  if (!entry.isIntersecting) return;
+
+  // Replace src with data-src
+  console.log(entry.target.src);
+
+  entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+
+  observer.unobserve(entry.target);
+};
+
+const imgObserver = new IntersectionObserver(loadImage, {
+  root: null,
+  threshold: 0,
+});
+
+imgTargets.forEach(img => imgObserver.observe(img));
+
 // const h1 = document.querySelector('h1');
 
 // //Going downwards: child
